@@ -1,0 +1,141 @@
+﻿<Window x:Class="NoPugsNeeded.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NoPugsNeeded"
+        mc:Ignorable="d"
+        Title="No Pugs Needed" Height="450" Width="800">
+    <Window.Resources>
+        <!--<DataTemplate x:Key="keySetting" DataType="{x:Type local:FollowersSettings}">
+            <StackPanel Orientation="Horizontal">
+                <TextBox></TextBox>
+            </StackPanel>
+        </DataTemplate>-->
+    </Window.Resources>
+    <TabControl>
+        <TabItem Header="Main">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <!-- 1 mode -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!-- 2 commands -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <!-- 1 heading -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <!-- 2 full control -->
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!-- 3 followers -->
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!-- 4 script -->
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!-- 5 active mode -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <!-- 6 status -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <!-- 7 buttons -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!-- mode section -->
+                <Label Grid.Column="1" Grid.Row="1" Content="Mode" FontSize="16" Margin="0 0 0 5"></Label>
+                <RadioButton Grid.Column="1" Grid.Row="2" GroupName="Mode" Name="rBtn_FullControl" Content="Full Control" Checked="ModeChangedByGui"></RadioButton>
+                <RadioButton Grid.Column="1" Grid.Row="3" GroupName="Mode" Name="rBtn_Followers" Content="Followers" Checked="ModeChangedByGui"></RadioButton>
+                <RadioButton Grid.Column="1" Grid.Row="4" GroupName="Mode" Name="rBtn_Script" Content="Script" Checked="ModeChangedByGui"></RadioButton>
+                <!-- commands section -->
+                <Label Grid.Column="2" Grid.Row="1" Content="Commands" FontSize="16" Margin="0 0 0 5"></Label>
+                <StackPanel Grid.Column="2" Grid.Row="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Switch to Full Control Mode:"></Label>
+                        <Label FontSize="14" Content="F1"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Suspend/Resume:"></Label>
+                        <Label FontSize="14" Content="F5"></Label>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Grid.Row="3">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Switch to Followers Mode:"></Label>
+                        <Label FontSize="14" Content="F2"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Suspend/Resume:"></Label>
+                        <Label FontSize="14" Content="F5"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Enable/Disable Alt Key:"></Label>
+                        <Label FontSize="14" Content="F6"></Label>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Grid.Row="4">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Switch to Script Mode:"></Label>
+                        <Label FontSize="14" Content="F3"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Suspend/Resume:"></Label>
+                        <Label FontSize="14" Content="F5"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Load New Script" Click="LoadScript"></Button>
+                        <TextBox Width="180" Name="textbox_ScriptName"></TextBox>
+                        <Label Content="PID:"></Label>
+                        <TextBox Width="70" Name="textbox_Pid"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <!-- active mode section -->
+                <StackPanel Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="5" Orientation="Horizontal">
+                    <Label Content="Active Mode:"></Label>
+                    <Label FontSize="14" Name="label_ActiveMode" Content=""></Label>
+                </StackPanel>
+                <!-- status section -->
+                <StackPanel Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="6" Orientation="Horizontal">
+                    <Label Content="Status:"></Label>
+                    <Label FontSize="14" FontWeight="Bold" Name="label_Status" Content="Choose Mode"></Label>
+                </StackPanel>
+                <!-- loaded scripts section -->
+                <ListView Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="5" Grid.RowSpan="2" Name="listview_LoadedScripts">
+                </ListView>
+                <!-- bottom buttons section -->
+                <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Height="40" Margin="0 5 0 0" Content="Start" Name="btn_StartStop" Click="StartStopByGui"></Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Followers Settings">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <!-- 1 key -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!-- 2 allow -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!-- 3 allow shift -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!-- 4 allow ctrl -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!-- 5 allow alt -->
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <!-- 1 key settings -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <!-- 2 buttons -->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <CheckBox Content="Enable Spacebar" Name="checkbox_EnableSpacebar"></CheckBox>
+                    <Label Content="Key Settings" FontWeight="Bold"></Label>
+                </StackPanel>
+                <Button Grid.Column="1" Grid.Row="2" Content="Save" Margin="0 5 0 0" Name="btn_SaveFollowersSettings" Click="SaveFollowersSettings"></Button>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
